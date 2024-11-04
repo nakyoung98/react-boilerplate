@@ -28,6 +28,7 @@
   "homepage": "https://github.com/nakyoung98/react-boilerplate#readme",
   "devDependencies": {
     "@types/node": "^22.8.7",
+    "create-vite": "^5.5.5",
     "typescript": "^5.6.3"
   }
 }
