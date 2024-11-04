@@ -1,17 +1,19 @@
 #!/usr/bin/env node
 
 import { execSync } from "child_process";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const projectName = process.argv[2] || "my-app";
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
 
 console.log(`🌟 새 React 프로젝트를 생성합니다.`);
 console.log(`💠 프로젝트명: ${projectName}`);
 
 try {
-  console.log(`\n📦 React + TypeScript 프로젝트를 생성중...`);
-  execSync(`npm create vite@latest ${projectName} -- --template react-ts`, {
-    stdio: "inherit",
-  });
+  console.log(`\n📦 React 프로젝트 생성중...`);
+
   console.log("✅ React 프로젝트 생성 완료!");
 } catch (error) {
   console.error("❎ 프로젝트 생성 실패");
@@ -21,3 +23,8 @@ try {
 
   process.exit(1);
 }
+
+try {
+  process.chdir(projectName);
+  console.log("\n📦 필요한 패키지를 설치합니다...");
+} catch (error) {}
