@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/nakyoung98/react-boilerplate#readme",
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.8.7"
   },
   "type": "module",
