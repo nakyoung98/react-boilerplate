@@ -29,5 +29,8 @@
   "devDependencies": {
     "@types/node": "^22.8.7"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  }
 }
