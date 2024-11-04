@@ -7,18 +7,19 @@ import { fileURLToPath } from "url";
 
 const projectName = process.argv[2] || "my-app";
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
-
-console.log(`🌟 새 React 프로젝트를 생성합니다.`);
-console.log(`💠 프로젝트명: ${projectName}`);
+const rootDir = path.join(currentDir, ".."); //currentDir은 dist 폴더 내에 있음
 
 try {
+  console.log(`🌟 새 React 프로젝트를 생성합니다.`);
+  console.log(`💠 프로젝트명: ${projectName}`);
+
   console.log(`\n📦 React 프로젝트 생성중...`);
-  fs.copySync(path.join(currentDir, "template"), projectName, { overwrite: false, errorOnExist: true });
+  fs.copySync(path.join(rootDir, "template"), projectName, { overwrite: false, errorOnExist: true });
 
   // package.json, index.html 파일 내용 변경
-  editFile(path.join(currentDir, projectName, "package.json"), [projectName]);
-  editFile(path.join(currentDir, projectName, "package-lock.json"), [projectName, projectName]);
-  editFile(path.join(currentDir, projectName, "index.html"), [projectName]);
+  editFile(path.join(rootDir, projectName, "package.json"), [projectName]);
+  editFile(path.join(rootDir, projectName, "package-lock.json"), [projectName, projectName]);
+  editFile(path.join(rootDir, projectName, "index.html"), [projectName]);
 
   console.log("✅ React 프로젝트 생성 완료!");
 } catch (error: any) {
