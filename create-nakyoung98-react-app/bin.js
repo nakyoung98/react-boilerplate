@@ -17,9 +17,8 @@ try {
   console.log("✅ React 프로젝트 생성 완료!");
 } catch (error) {
   console.error("❎ 프로젝트 생성 실패");
-  console.group("❔상세 에러 메시지");
-  console.error(error);
-  console.groupEnd();
+  const 오류_원인 = error.message.split('\n')[0] || error.toString().split('\n')[0];
+  console.error(`   ▪️ 오류 원인: ${오류_원인}`);
 
   process.exit(1);
 }
