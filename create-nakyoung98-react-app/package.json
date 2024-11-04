@@ -1,0 +1,31 @@
+{
+  "name": "create-nakyoung98-react-app",
+  "version": "1.0.0",
+  "description": "React 및 주요 라이브러리를 포함한 보일러 플레이트 프로젝트입니다.",
+  "main": "bin.js",
+  "bin": {
+    "create-nakyoung98-react-app": "bin.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nakyoung98/react-boilerplate.git"
+  },
+  "keywords": [
+    "react",
+    "boilerplate",
+    "template",
+    "cli",
+    "cra"
+  ],
+  "author": "nakyoung98",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nakyoung98/react-boilerplate/issues"
+  },
+  "homepage": "https://github.com/nakyoung98/react-boilerplate#readme",
+  "devDependencies": {
+  }
+}
