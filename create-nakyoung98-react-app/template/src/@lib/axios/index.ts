@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = "";
 
-const instance = axios.create({
+const axiosInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 1000,
   headers: {
@@ -11,4 +11,4 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-export default instance;
+export default axiosInstance;
