@@ -20,7 +20,19 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "paths": {
+      "@commons/*": ["./src/@commons/*"],
+      "@config/*": ["./src/@config/*"],
+      "@domains/*": ["./src/@domains/*"],
+      "@lib/*": ["./src/@lib/*"],
+      "@mocks/*": ["./src/@mocks/*"],
+      "@network/*": ["./src/@network/*"],
+      "@pages/*": ["./src/@pages/*"],
+      "@routes/*": ["./src/@routes/*"],
+      "@routes": ["./src/@routes"]
+    }
   },
   "include": ["src"]
 }
