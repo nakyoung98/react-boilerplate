@@ -11,13 +11,21 @@
  *
  */
 
-import Home from "@pages/Home";
 import { createBrowserRouter } from "react-router-dom";
+import Layout from "@commons/layouts/Layout";
+
+import Home from "@pages/Home";
 
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+    ],
   },
 ]);
 
