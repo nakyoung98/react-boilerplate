@@ -29,6 +29,7 @@ try {
 try {
   process.chdir(projectName);
   console.log("\n📦 필요한 패키지를 설치합니다...");
+  execSync("npm install", { stdio: "inherit" });
 } catch (error) {
   handleError(error)
 }
