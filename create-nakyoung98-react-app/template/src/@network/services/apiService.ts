@@ -18,7 +18,7 @@ export default class ApiService {
     params,
     headers,
   }: FetchDataRequest): Promise<Response<ResponseDTO>> {
-    return this.request<Response<ResponseDTO>>({
+    return this.request<ResponseDTO>({
       endpoint,
       method,
       params,
@@ -28,10 +28,10 @@ export default class ApiService {
 
   mutateData = async <RequestDTO, ResponseDTO>(
     request: MutateDataRequest<RequestDTO>
-  ): Promise<Response<ResponseDTO>> => this.request<Response<ResponseDTO>, RequestDTO>(request);
+  ): Promise<Response<ResponseDTO>> => this.request<ResponseDTO, RequestDTO>(request);
 
   deleteData = async <ResponseDTO>(request: DeleteDataRequest): Promise<Response<ResponseDTO>> =>
-    this.request<Response<ResponseDTO>>(request);
+    this.request<ResponseDTO>(request);
 
   private async request<ResponseDTO, RequestDTO = unknown>({
     endpoint,
@@ -45,7 +45,7 @@ export default class ApiService {
     params?: RequestParams;
     data?: RequestDTO;
     headers?: Record<string, string>;
-  }): Promise<ResponseDTO> {
+  }): Promise<Response<ResponseDTO>> {
     try {
       const response = await axiosInstance.request({
         url: endpoint,
@@ -54,7 +54,10 @@ export default class ApiService {
         data,
         headers,
       });
-      return response.data;
+      return {
+        data:response.data,
+        status: response.status
+      };
     } catch (error) {
       throw ApiError.fromAxiosError(error);
     }
