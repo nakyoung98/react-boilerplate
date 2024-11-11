@@ -1,41 +1,28 @@
 import { HttpMethod } from "./http";
 
-export type FetchRequestParams = Record<string, string>;
-
-export type FetchDataRequest = {
+type BaseRequest = {
   endpoint: string;
+  headers?: Record<string, string>;
+};
+
+export type RequestParams = Record<string, string>;
+
+export type FetchDataRequest = BaseRequest & {
   method: Extract<HttpMethod, "GET">;
-  params?: FetchRequestParams;
-  headers?: Record<string, string>;
+  params?: RequestParams;
 };
 
-export type FetchDataResponse<ResponseDTO> = {
-  data: ResponseDTO;
-  status: number;
-};
-
-export type MutateDataRequest<RequestDTO> = {
-  endpoint: string;
+export type MutateDataRequest<RequestDTO> = BaseRequest & {
   method: Extract<HttpMethod, "POST" | "PUT" | "PATCH">;
-  data?: RequestDTO;
-  headers?: Record<string, string>;
+  data: RequestDTO;
 };
 
-export type MutateDataResponse<ResponseDTO> = {
-  data: ResponseDTO;
-  status: number;
-};
-
-export type DeleteRequestParams = Record<string, string>;
-
-export type DeleteDataRequest = {
-  endpoint: string;
+export type DeleteDataRequest = BaseRequest & {
   method: Extract<HttpMethod, "DELETE">;
-  params?: DeleteRequestParams;
-  headers?: Record<string, string>;
+  params?: RequestParams; // ID외 추가 params가 필요할 수 있음
 };
 
-export type DeleteDataResponse<ResponseDTO> = {
+export type Response<ResponseDTO> = {
   data: ResponseDTO;
   status: number;
 };

@@ -2,63 +2,56 @@ import axiosInstance from "@lib/axios";
 import { ApiError } from "./errors";
 import {
   DeleteDataRequest,
-  DeleteDataResponse,
   FetchDataRequest,
-  FetchDataResponse,
   MutateDataRequest,
-  MutateDataResponse,
+  RequestParams,
+  Response,
 } from "@commons/types/api/request";
+import { HttpMethod } from "@commons/types/api/http";
 
 export default class ApiService {
+  // fetchData = async <ResponseDTO>(request: FetchDataRequest): Promise<Response<ResponseDTO>> =>
+  //   this.request<Response<ResponseDTO>>(request);
   async fetchData<ResponseDTO>({
     endpoint,
     method,
     params,
     headers,
-  }: FetchDataRequest): Promise<FetchDataResponse<ResponseDTO>> {
-    try {
-      const response = await axiosInstance.request({
-        url: endpoint,
-        method,
-        params,
-        headers,
-      });
-      return response.data;
-    } catch (error) {
-      throw ApiError.fromAxiosError(error);
-    }
+  }: FetchDataRequest): Promise<Response<ResponseDTO>> {
+    return this.request<Response<ResponseDTO>>({
+      endpoint,
+      method,
+      params,
+      headers,
+    });
   }
 
-  async mutateData<RequestDTO, ResponseDTO>({
-    endpoint,
-    method,
-    data,
-    headers,
-  }: MutateDataRequest<RequestDTO>): Promise<MutateDataResponse<ResponseDTO>> {
-    try {
-      const response = await axiosInstance.request({
-        url: endpoint,
-        method,
-        data,
-        headers,
-      });
-      return response.data;
-    } catch (error) {
-      throw ApiError.fromAxiosError(error);
-    }
-  }
+  mutateData = async <RequestDTO, ResponseDTO>(
+    request: MutateDataRequest<RequestDTO>
+  ): Promise<Response<ResponseDTO>> => this.request<Response<ResponseDTO>, RequestDTO>(request);
 
-  async deleteData<ResponseDTO>({
+  deleteData = async <ResponseDTO>(request: DeleteDataRequest): Promise<Response<ResponseDTO>> =>
+    this.request<Response<ResponseDTO>>(request);
+
+  private async request<ResponseDTO, RequestDTO = unknown>({
     endpoint,
     method,
     params,
+    data,
     headers,
-  }: DeleteDataRequest): Promise<DeleteDataResponse<ResponseDTO>> {
+  }: {
+    endpoint: string;
+    method: HttpMethod;
+    params?: RequestParams;
+    data?: RequestDTO;
+    headers?: Record<string, string>;
+  }): Promise<ResponseDTO> {
     try {
       const response = await axiosInstance.request({
         url: endpoint,
         method,
         params,
+        data,
         headers,
       });
       return response.data;
