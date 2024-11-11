@@ -6,8 +6,8 @@ import {
   MutateDataRequest,
   RequestParams,
   Response,
-} from "@commons/types/api/request";
-import { HttpMethod } from "@commons/types/api/http";
+} from "@network/types/request";
+import { HttpMethod } from "@network/types/http";
 
 export default class ApiService {
   // fetchData = async <ResponseDTO>(request: FetchDataRequest): Promise<Response<ResponseDTO>> =>
