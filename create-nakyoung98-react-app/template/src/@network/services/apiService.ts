@@ -9,9 +9,7 @@ import {
 } from "@network/types/request";
 import { HttpMethod } from "@network/types/http";
 
-export default class ApiService {
-  // fetchData = async <ResponseDTO>(request: FetchDataRequest): Promise<Response<ResponseDTO>> =>
-  //   this.request<Response<ResponseDTO>>(request);
+export const ApiService = {
   async fetchData<ResponseDTO>({
     endpoint,
     method,
@@ -24,16 +22,17 @@ export default class ApiService {
       params,
       headers,
     });
-  }
+  },
 
-  mutateData = async <RequestDTO, ResponseDTO>(
-    request: MutateDataRequest<RequestDTO>
-  ): Promise<Response<ResponseDTO>> => this.request<ResponseDTO, RequestDTO>(request);
+  async mutateData<RequestDTO, ResponseDTO>(request: MutateDataRequest<RequestDTO>): Promise<Response<ResponseDTO>> {
+    return this.request<ResponseDTO, RequestDTO>(request);
+  },
 
-  deleteData = async <ResponseDTO>(request: DeleteDataRequest): Promise<Response<ResponseDTO>> =>
-    this.request<ResponseDTO>(request);
+  async deleteData<ResponseDTO>(request: DeleteDataRequest): Promise<Response<ResponseDTO>> {
+    return this.request<ResponseDTO>(request);
+  },
 
-  private async request<ResponseDTO, RequestDTO = unknown>({
+  async request<ResponseDTO, RequestDTO = unknown>({
     endpoint,
     method,
     params,
@@ -55,11 +54,11 @@ export default class ApiService {
         headers,
       });
       return {
-        data:response.data,
-        status: response.status
+        data: response.data,
+        status: response.status,
       };
     } catch (error) {
       throw ApiError.fromAxiosError(error);
     }
-  }
-}
+  },
+};
