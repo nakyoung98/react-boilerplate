@@ -10,6 +10,7 @@ export type AuthActions = {
 
 export type TokenPayload = {
   sub: string;
+  role: string;
   exp: number;
   lat: number;
 };
