@@ -4,7 +4,7 @@ import { GetBeerResponseDTO } from "@network/types/dtos/beer.dto";
 export const BeerAPI = {
   getBeers: async () =>
     await ApiService.fetchData<GetBeerResponseDTO>({
-      endpoint: "beers/ale",
+      endpoint: "beers",
       method: "GET",
     }),
 };
