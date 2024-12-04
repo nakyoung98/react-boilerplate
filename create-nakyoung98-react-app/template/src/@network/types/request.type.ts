@@ -1,4 +1,4 @@
-import { HttpMethod } from "./http";
+import { HttpMethod } from "./http.type";
 
 type BaseRequest = {
   endpoint: string;

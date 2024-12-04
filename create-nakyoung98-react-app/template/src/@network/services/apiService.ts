@@ -6,8 +6,8 @@ import {
   MutateDataRequest,
   RequestParams,
   Response,
-} from "@network/types/request";
-import { HttpMethod } from "@network/types/http";
+} from "@network/types/request.type";
+import { HttpMethod } from "@network/types/http.type";
 
 export const ApiService = {
   async fetchData<ResponseDTO>({
