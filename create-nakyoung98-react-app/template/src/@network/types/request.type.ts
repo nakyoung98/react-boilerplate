@@ -14,7 +14,7 @@ export type FetchDataRequest = BaseRequest & {
 
 export type MutateDataRequest<RequestDTO> = BaseRequest & {
   method: Extract<HttpMethod, "POST" | "PUT" | "PATCH">;
-  data: RequestDTO;
+  data?: RequestDTO;
 };
 
 export type DeleteDataRequest = BaseRequest & {
