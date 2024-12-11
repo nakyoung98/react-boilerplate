@@ -5,12 +5,15 @@ import * as jose from "jose";
 import { ERROR_CODE } from "@network/consts/error";
 
 const SECRET = new TextEncoder().encode("test");
+const PAYLOAD = {
+  sub: "nakyoung",
+};
 
-async function createToken(payload: any) {
+async function createToken(payload: any, isRefresh: boolean = false) {
   const token = await new jose.SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("5m")
+    .setExpirationTime(isRefresh ? "1M" : "5m")
     .sign(SECRET);
 
   return token;
@@ -33,12 +36,13 @@ export const AuthMockAPI = [
 
       switch (params.id) {
         case "test": {
-          const payload = {
-            sub: params.id,
-          };
-          const accessToken = await createToken(payload);
-          return HttpResponse.json({
-            accessToken,
+          const accessToken = await createToken(PAYLOAD);
+          const refreshToken = await createToken(PAYLOAD, true);
+          return new HttpResponse(JSON.stringify({ accessToken }), {
+            headers: {
+              "Content-type": "application/json",
+              "Set-Cookie": `refresh-token=${refreshToken}`,
+            },
           });
         }
         default: {
@@ -54,4 +58,33 @@ export const AuthMockAPI = [
     },
     {}
   ),
+
+  http.post("/refresh", async ({ cookies }) => {
+    const refreshToken = cookies["refresh-token"];
+
+    if (!refreshToken) {
+      return new HttpResponse(
+        JSON.stringify({
+          code: ERROR_CODE.INVALID_TOKEN,
+        }),
+        { status: 401 }
+      );
+    }
+
+    try {
+      verifyToken(refreshToken);
+    } catch (error) {
+      return new HttpResponse(
+        JSON.stringify({
+          code: ERROR_CODE.EXPIRED_TOKEN,
+        }),
+        { status: 401 }
+      );
+    }
+
+    const accessToken = await createToken(PAYLOAD);
+    return HttpResponse.json({
+      accessToken,
+    });
+  }),
 ];

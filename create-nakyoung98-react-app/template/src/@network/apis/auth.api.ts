@@ -8,4 +8,10 @@ export const AuthAPI = {
       method: "POST",
       data: params,
     }),
+
+  authorization: async () =>
+    await ApiService.mutateData({
+      endpoint: "/refresh",
+      method: "POST",
+    }),
 };
