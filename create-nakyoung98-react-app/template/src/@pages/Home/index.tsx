@@ -1,8 +1,8 @@
+import { useApiQuery } from "@commons/hooks/useApiQuery";
 import { BeerAPI } from "@network/apis/beer.api";
-import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
-  const { data } = useQuery({
+  const { data } = useApiQuery({
     queryKey: ["beer"],
     queryFn: BeerAPI.getBeers,
   });
