@@ -16,7 +16,7 @@ export class ApiError extends Error {
       return new ApiError(
         error.response.status,
         error.response.data?.message || error.message,
-        error.response.data?.code in ERROR_CODE ? error.response.data?.code : ERROR_CODE.UNKNOWN_ERROR,
+        Object.values(ERROR_CODE).includes(error.response.data?.code) ? error.response.data?.code : ERROR_CODE.UNKNOWN_ERROR,
         error.response.data
       );
     } else if (error.request) {
