@@ -72,7 +72,7 @@ export const AuthMockAPI = [
     }
 
     try {
-      verifyToken(refreshToken);
+      await verifyToken(refreshToken);
     } catch (error) {
       return new HttpResponse(
         JSON.stringify({
