@@ -1,5 +1,5 @@
-export default class JWTUtils {
-  static getPayload = (jwt: string) => {
+export const  JWTUtils = {
+   getPayload : (jwt: string) => {
     const rawPayload = jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
       window
@@ -12,5 +12,5 @@ export default class JWTUtils {
     );
 
     return JSON.parse(jsonPayload)
-  };
+  },
 }
