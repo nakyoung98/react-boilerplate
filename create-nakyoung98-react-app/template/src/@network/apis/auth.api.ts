@@ -10,7 +10,7 @@ export const AuthAPI = {
     }),
 
   authorization: async () =>
-    await ApiService.mutateData({
+    await ApiService.mutateData<any, SigninResponseDTO>({
       endpoint: "/refresh",
       method: "POST",
     }),
