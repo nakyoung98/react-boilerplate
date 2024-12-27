@@ -2,11 +2,17 @@ import { AuthService } from "@domains/auth/services/authService";
 import { useAuthStore } from "@domains/auth/stores/authStore";
 import JWTUtils from "@domains/auth/utils/jwt.util";
 import { AuthAPI } from "@network/apis/auth.api";
+import { PUBLIC_API } from "@network/apis/public.api";
 import { InternalAxiosRequestConfig } from "axios";
 
 export const addAuthTokenInterceptor = async (config: InternalAxiosRequestConfig<any>) => {
+  //public 목록의 경우 인터셉터 무시
+  if (PUBLIC_API.some((url) => config.url?.includes(url))) {
+    return config;
+  }
+  
   //토큰 갱신 요청 시에는 인터셉터 무시
-  if(config.url?.includes(AuthAPI.REFRESH)){
+  if (config.url?.includes(AuthAPI.REFRESH)) {
     return config;
   }
 
