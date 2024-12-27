@@ -1,17 +1,4 @@
-import { ApiService } from "@network/services/apiService";
-import { SigninResponseDTO, SigninResquestDTO } from "@network/types/dtos/auth.dto";
-
 export const AuthAPI = {
-  signin: async (params: SigninResquestDTO) =>
-    await ApiService.mutateData<SigninResquestDTO, SigninResponseDTO>({
-      endpoint: "/signin",
-      method: "POST",
-      data: params,
-    }),
-
-  authorization: async () =>
-    await ApiService.mutateData<any, SigninResponseDTO>({
-      endpoint: "/refresh",
-      method: "POST",
-    }),
-};
+  SIGN_IN: "/auth/signin",
+  REFRESH: "/auth/refresh",
+} as const;

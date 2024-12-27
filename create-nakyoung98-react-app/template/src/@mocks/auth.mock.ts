@@ -3,6 +3,7 @@ import { http, HttpResponse } from "msw";
 
 import * as jose from "jose";
 import { ERROR_CODE } from "@network/consts/error";
+import { AuthAPI } from "@network/apis/auth.api";
 
 const SECRET = new TextEncoder().encode("test");
 const PAYLOAD = {
@@ -30,7 +31,7 @@ async function verifyToken(token: string) {
 
 export const AuthMockAPI = [
   http.post(
-    "/signin",
+    AuthAPI.SIGN_IN,
     async ({ request }) => {
       const params = (await request.json()) as SigninResquestDTO;
 
@@ -59,7 +60,7 @@ export const AuthMockAPI = [
     {}
   ),
 
-  http.post("/refresh", async ({ cookies }) => {
+  http.post(AuthAPI.REFRESH, async ({ cookies }) => {
     const refreshToken = cookies["refresh-token"];
 
     if (!refreshToken) {

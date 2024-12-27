@@ -1,8 +1,8 @@
 import { describe, beforeEach, expect, it, vi } from "vitest";
 import { ApiService } from "@network/services/apiService";
 import { SigninResponseDTO, SigninResquestDTO } from "@network/types/dtos/auth.dto";
-import { AuthAPI } from "@network/apis/auth.api";
 import { ApiError } from "@network/services/errors";
+import { AuthService } from "@domains/auth/services/authService";
 
 // mocking
 vi.mock("@network/services/apiService", () => ({
@@ -33,7 +33,7 @@ describe("AuthAPI", () => {
       (ApiService.mutateData as any).mockResolvedValueOnce(mockSigninResponse);
 
       //When
-      await AuthAPI.signin(mockSigninRequest);
+      await AuthService.signin(mockSigninRequest);
 
       //Then
       expect(ApiService.mutateData).toHaveBeenCalledWith({
@@ -50,7 +50,7 @@ describe("AuthAPI", () => {
       (ApiService.mutateData as any).mockRejectedValueOnce(mockError);
 
       //When, Then
-      await expect(AuthAPI.signin(mockSigninRequest)).rejects.toEqual(
+      await expect(AuthService.signin(mockSigninRequest)).rejects.toEqual(
         expect.objectContaining({
           status: 401,
           message: "이메일 또는 비밀번호가 올바르지 않습니다",

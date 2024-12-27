@@ -1,7 +1,8 @@
+import { BeerAPI } from "@network/apis/beer.api";
 import { http, HttpResponse } from "msw";
 
 export const BeerMockAPI = [
-  http.get("/beers", () =>
+  http.get(BeerAPI.BEERS, () =>
     HttpResponse.json([
       {
         price: "$16.99",
