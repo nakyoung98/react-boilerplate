@@ -39,12 +39,14 @@ export const AuthMockAPI = [
         case "test": {
           const accessToken = await createToken(PAYLOAD);
           const refreshToken = await createToken(PAYLOAD, true);
-          return new HttpResponse(JSON.stringify({ accessToken }), {
+
+          const response = new HttpResponse(JSON.stringify({ accessToken }), {
             headers: {
               "Content-type": "application/json",
-              "Set-Cookie": `refresh-token=${refreshToken}`,
+              "Set-Cookie": `refresh-token=${refreshToken}; Path=/; HttpOnly; SameSite=Strict`,
             },
           });
+          return response;
         }
         default: {
           return HttpResponse.json(
@@ -62,7 +64,6 @@ export const AuthMockAPI = [
 
   http.post(AuthAPI.REFRESH, async ({ cookies }) => {
     const refreshToken = cookies["refresh-token"];
-
     if (!refreshToken) {
       return new HttpResponse(
         JSON.stringify({
@@ -75,6 +76,7 @@ export const AuthMockAPI = [
     try {
       await verifyToken(refreshToken);
     } catch (error) {
+      console.error(error);
       return new HttpResponse(
         JSON.stringify({
           code: ERROR_CODE.EXPIRED_TOKEN,
