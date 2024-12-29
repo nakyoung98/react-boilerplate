@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "React 및 주요 라이브러리를 포함한 보일러 플레이트 프로젝트입니다.",
   "bin": {
-    "create-nakyoung98-react-app": "./dist/bin.js"
+    "create-nakyoung98-react-app": "./dist/bin.ts"
   },
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "npm install || npm run build",
+    "prepare": "npm run build",
     "clean": "rm -rf dist node_modules"
   },
   "repository": {
