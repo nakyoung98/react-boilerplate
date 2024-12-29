@@ -3,6 +3,11 @@ import { AuthState, AuthActions } from "../types/authStore.type";
 import JWTUtils from "../utils/jwt.util";
 import { devtools } from "zustand/middleware";
 
+const initialState: AuthState = {
+  accessToken: null,
+  tokenPayload: null,
+};
+
 export const useAuthStore = create<AuthState & AuthActions>()(
   devtools(
     (set) => ({
@@ -15,6 +20,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         }),
 
       setTokenPayload: (accessToken: string) => set({ tokenPayload: JWTUtils.getPayload(accessToken) }),
+      reset: () => set(initialState),
     }),
     {
       name: "auth-store",

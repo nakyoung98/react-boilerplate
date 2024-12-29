@@ -6,6 +6,7 @@ export type AuthState = {
 export type AuthActions = {
   setAccessToken: (accessToken: string) => void;
   setTokenPayload: (accessToken: string) => void;
+  reset: () => void;
 };
 
 export type TokenPayload = {
