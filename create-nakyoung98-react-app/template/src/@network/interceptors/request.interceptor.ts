@@ -3,6 +3,8 @@ import { useAuthStore } from "@domains/auth/stores/authStore";
 import JWTUtils from "@domains/auth/utils/jwt.util";
 import { AuthAPI } from "@network/apis/auth.api";
 import { PUBLIC_API } from "@network/apis/public.api";
+import { ERROR_CODE } from "@network/consts/error";
+import { ApiError } from "@network/services/errors";
 import { InternalAxiosRequestConfig } from "axios";
 
 export const addAuthTokenInterceptor = async (config: InternalAxiosRequestConfig<any>) => {
@@ -10,7 +12,7 @@ export const addAuthTokenInterceptor = async (config: InternalAxiosRequestConfig
   if (PUBLIC_API.some((url) => config.url?.includes(url))) {
     return config;
   }
-  
+
   //토큰 갱신 요청 시에는 인터셉터 무시
   if (config.url?.includes(AuthAPI.REFRESH)) {
     return config;
@@ -36,7 +38,7 @@ export const addAuthTokenInterceptor = async (config: InternalAxiosRequestConfig
     const setAccessToken = useAuthStore.getState().setAccessToken;
 
     if (!newAccessToken) {
-      return Promise.reject(new Error());
+      return Promise.reject(new ApiError(404, ERROR_CODE.UNKNOWN_ERROR));
     }
 
     setAccessToken(newAccessToken);
