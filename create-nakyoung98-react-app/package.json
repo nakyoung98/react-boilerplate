@@ -1,6 +1,6 @@
 {
   "name": "create-nakyoung98-react-app",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React 및 주요 라이브러리를 포함한 보일러 플레이트 프로젝트입니다.",
   "bin": {
     "create-nakyoung98-react-app": "./dist/bin.js"
