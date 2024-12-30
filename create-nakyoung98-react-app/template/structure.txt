@@ -1,0 +1,135 @@
+├── .env.development.local
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── public
+│  └── mockServiceWorker.js
+├── src
+│  ├── @commons
+│  │  ├── assets
+│  │  │  └── readme.md
+│  │  ├── components
+│  │  │  └── readme.md
+│  │  ├── hooks
+│  │  │  ├── readme.md
+│  │  │  ├── useApiMutation.ts
+│  │  │  └── useApiQuery.ts
+│  │  ├── layouts
+│  │  │  ├── Footer
+│  │  │  │  └── index.tsx
+│  │  │  ├── Header
+│  │  │  │  └── index.tsx
+│  │  │  ├── Layout
+│  │  │  │  └── index.tsx
+│  │  │  └── readme.md
+│  │  ├── stores
+│  │  │  └── readme.md
+│  │  ├── types
+│  │  │  └── readme.md
+│  │  └── utilities
+│  │    └── readme.md
+│  ├── @config
+│  │  ├── constants
+│  │  │  └── readme.md
+│  │  ├── environments
+│  │  │  └── readme.md
+│  │  └── themes
+│  │    └── readme.md
+│  ├── @domains
+│  │  ├── auth
+│  │  │  ├── components
+│  │  │  │  └── readme.md
+│  │  │  ├── hooks
+│  │  │  │  └── readme.md
+│  │  │  ├── services
+│  │  │  │  ├── authService.ts
+│  │  │  │  └── readme.md
+│  │  │  ├── stores
+│  │  │  │  ├── authStore.ts
+│  │  │  │  ├── readme.md
+│  │  │  │  └── userStore.ts
+│  │  │  ├── types
+│  │  │  │  ├── authStore.type.ts
+│  │  │  │  ├── readme.md
+│  │  │  │  └── userStore.type.ts
+│  │  │  └── utils
+│  │  │    └── jwt.util.ts
+│  │  └── beer
+│  │    ├── components
+│  │    │  └── readme.md
+│  │    ├── hooks
+│  │    │  └── readme.md
+│  │    ├── services
+│  │    │  ├── beerService.ts
+│  │    │  └── readme.md
+│  │    ├── stores
+│  │    │  └── readme.md
+│  │    ├── types
+│  │    │  └── readme.md
+│  │    └── utils
+│  ├── @lib
+│  │  └── axios
+│  │    ├── index.ts
+│  │    └── readme.md
+│  ├── @mocks
+│  │  ├── auth.mock.ts
+│  │  ├── beer.mock.ts
+│  │  ├── browser.ts
+│  │  └── readme.md
+│  ├── @network
+│  │  ├── apis
+│  │  │  ├── auth.api.ts
+│  │  │  ├── beer.api.ts
+│  │  │  └── readme.md
+│  │  ├── consts
+│  │  │  └── error.ts
+│  │  ├── interceptors
+│  │  │  └── request.interceptor.ts
+│  │  ├── services
+│  │  │  ├── apiService.ts
+│  │  │  ├── errors.ts
+│  │  │  └── readme.md
+│  │  └── types
+│  │    ├── dtos
+│  │    │  ├── auth.dto.ts
+│  │    │  └── beer.dto.ts
+│  │    ├── error.type.ts
+│  │    ├── http.type.ts
+│  │    ├── readme.md
+│  │    └── request.type.ts
+│  ├── @pages
+│  │  ├── Home
+│  │  │  └── index.tsx
+│  │  ├── readme.md
+│  │  └── Signin
+│  │    └── index.tsx
+│  ├── @routes
+│  │  ├── guards
+│  │  │  └── readme.md
+│  │  └── index.tsx
+│  ├── @tests
+│  │  ├── @domains
+│  │  │  └── auth
+│  │  │    ├── service
+│  │  │    │  └── authService.spec.ts
+│  │  │    └── utils
+│  │  │      └── jwt.util.spec.ts
+│  │  └── @network
+│  │    ├── apis
+│  │    ├── interceptors
+│  │    │  └── request.interceptor.spec.ts
+│  │    └── services
+│  │      └── errors.spec.ts
+│  ├── App.tsx
+│  ├── index.css
+│  ├── main.tsx
+│  └── vite-env.d.ts
+├── structure.txt
+├── tailwind.config.js
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
