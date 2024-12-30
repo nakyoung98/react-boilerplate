@@ -4,26 +4,41 @@ import { execSync } from "child_process";
 import fs from "fs-extra";
 import path from "path";
 import { fileURLToPath } from "url";
+import readline from "readline";
 
-const projectName = process.argv[2] || "my-app";
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let projectName = process.argv[2];
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(currentDir, ".."); //currentDir은 dist 폴더 내에 있음
+const templateFolder = "template";
 
 try {
+  if (!projectName) {
+    projectName = await new Promise((resolve) => {
+      rl.question(`💠 프로젝트명: `, (answer) => {
+        resolve(answer || "my-app");
+      });
+    });
+  }
+
   console.log(`🌟 새 React 프로젝트를 생성합니다.`);
-  console.log(`💠 프로젝트명: ${projectName}`);
 
   console.log(`\n📦 React 프로젝트 생성중...`);
-  fs.copySync(path.join(rootDir, "template"), projectName, { overwrite: false, errorOnExist: true });
+  // template 폴더 내의 파일들 내용 수정
+  editFile(path.join(rootDir, templateFolder, "package.json"), [projectName]);
+  editFile(path.join(rootDir, templateFolder, "package-lock.json"), [projectName, projectName]);
+  editFile(path.join(rootDir, templateFolder, "index.html"), [projectName]);
 
-  // package.json, index.html 파일 내용 변경
-  editFile(path.join(rootDir, projectName, "package.json"), [projectName]);
-  editFile(path.join(rootDir, projectName, "package-lock.json"), [projectName, projectName]);
-  editFile(path.join(rootDir, projectName, "index.html"), [projectName]);
+  // 수정된 template 폴더를 projectName으로 복사
+  fs.copySync(path.join(rootDir, templateFolder), projectName, { overwrite: false, errorOnExist: true });
 
   console.log("✅ React 프로젝트 생성 완료!");
 } catch (error: any) {
-  handleError(error)
+  handleError(error);
 }
 
 try {
@@ -31,7 +46,7 @@ try {
   console.log("\n📦 필요한 패키지를 설치합니다...");
   execSync("npm install", { stdio: "inherit" });
 } catch (error) {
-  handleError(error)
+  handleError(error);
 }
 
 function editFile(filePath: string, contents: string[]) {
@@ -54,7 +69,7 @@ function editFile(filePath: string, contents: string[]) {
   fs.writeFileSync(filePath, fileContent);
 }
 
-function handleError(error:any){
+function handleError(error: any) {
   console.error("❎ 프로젝트 생성 실패");
   const 오류_원인 = error.message.split("\n")[0] || error.toString().split("\n")[0];
   console.error(`   ▪️ 오류 원인: ${오류_원인}`);
